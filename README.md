@@ -12,4 +12,4 @@ Find the directory you would like this stored in and type "git clone https://git
 
 Then simply type "cd LT_Tech_Showcase".
 
-From here just type "Python3 main.py".
+From here just type "python3 main.py".
