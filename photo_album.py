@@ -4,23 +4,28 @@ import urllib.request, json
 
 
 class PhotoAlbum:
+    def __init__(self):
+        self.data = []
+        try:
+            with urllib.request.urlopen("https://jsonplaceholder.typicode.com/photos") as url:
+                self.data = json.loads(url.read().decode())
+        except:
+            user_input = input("Something went wrong getting the data. Would you still like to continue? Y/N")
 
     def run(self):
         try:
-            with urllib.request.urlopen("https://jsonplaceholder.typicode.com/photos") as url:
-                data = json.loads(url.read().decode())
-                print(" > photo-album " + "1")
-                current_album = 1
-                for x in data:
-                    if current_album != x.get('albumId'):
-                        print("\n > photo-album " + str(x.get('albumId')) + "\n")
-                    current_album = x.get('albumId')
-                    print("[" + str(x.get('id')) + "]" + " " + x.get('title'))
-            return data
-        except(e):
+            print(" > photo-album " + "1")
+            current_album = 1
+            for x in self.data:
+                if current_album != x.get('albumId'):
+                    print("\n > photo-album " + str(x.get('albumId')) + "\n")
+                current_album = x.get('albumId')
+                print("[" + str(x.get('id')) + "]" + " " + x.get('title'))
+            return self.data
+        except:
             user_input = input("Something went wrong getting the data. Would you still like to continue? Y/N")
             if user_input == "Y" or user_input == "y":
-                return data
+                return self.data
             else:
                 exit()
 
@@ -48,7 +53,6 @@ class PhotoAlbum:
         user_input = self.try_parse_int(input("\n" + ": "))
         validate_user_selection = self.validate_main_menu(user_input)
         return validate_user_selection[1]
-
 
     def validate_main_menu(self, user_input):
         """Validation function that checks if 'user_input' argument is an int 1-3."""
