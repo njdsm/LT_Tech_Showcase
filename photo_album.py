@@ -73,9 +73,13 @@ class PhotoAlbum:
     def get_by_album_id(self, data):
         try:
             user_input = self.try_parse_int(input("What is the album id you want to see?\n: "))
-            for x in data:
-                if user_input == x.get('albumId'):
-                    print("[" + str(x.get('id')) + "]" + " " + x.get('title'))
+            if user_input == 0:
+                print("Not a valid number.")
+                return self.get_by_album_id(data)
+            else:
+                for x in data:
+                    if user_input == x.get('albumId'):
+                        print("[" + str(x.get('id')) + "]" + " " + x.get('title'))
         except:
             print("No album matching that id!")
 
@@ -84,6 +88,7 @@ class PhotoAlbum:
             user_input = self.try_parse_int(input("What is the image id you want to see?" + "\n: "))
             if user_input == 0:
                 print("Not a valid number.")
+                return self.get_by_image_id(data)
             else:
                 not_found = True
                 for x in data:
