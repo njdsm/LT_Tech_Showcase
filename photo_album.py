@@ -85,15 +85,15 @@ class PhotoAlbum:
             if user_input == 0:
                 print("Not a valid number.")
             else:
-                count = 0
+                not_found = True
                 for x in data:
                     if user_input == x.get('id'):
-                        count += 1
+                        not_found = False
                         print("Album: " + "[" + str(x.get('albumId')) + "]")
                         print("Title: " + x.get('title'))
                         print("Url: " + x.get('url'))
                         print("Thumbnail: " + x.get('thumbnailUrl'))
-                if count == 0:
+                if not_found:
                     print("No image matching that Id.")
         except:
             print("No image matching that id!")
